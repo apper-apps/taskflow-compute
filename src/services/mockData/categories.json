@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "id": "all",
+    "name": "All Tasks",
+    "color": "#6B7280",
+    "icon": "FolderOpen",
+    "taskCount": 12
+  },
+  {
+    "Id": 2,
+    "id": "work",
+    "name": "Work",
+    "color": "#3B82F6",
+    "icon": "Briefcase",
+    "taskCount": 3
+  },
+  {
+    "Id": 3,
+    "id": "personal",
+    "name": "Personal",
+    "color": "#10B981",
+    "icon": "User",
+    "taskCount": 3
+  },
+  {
+    "Id": 4,
+    "id": "shopping",
+    "name": "Shopping",
+    "color": "#F59E0B",
+    "icon": "ShoppingBag",
+    "taskCount": 2
+  },
+  {
+    "Id": 5,
+    "id": "health",
+    "name": "Health",
+    "color": "#EF4444",
+    "icon": "Heart",
+    "taskCount": 2
+  },
+  {
+    "Id": 6,
+    "id": "finance",
+    "name": "Finance",
+    "color": "#8B5CF6",
+    "icon": "DollarSign",
+    "taskCount": 2
+  }
+]
