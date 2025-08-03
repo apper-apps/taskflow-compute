@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useSelector } from 'react-redux';
 import SearchBar from "@/components/molecules/SearchBar";
 import ApperIcon from "@/components/ApperIcon";
-
+import Button from "@/components/atoms/Button";
+import { AuthContext } from "../../App";
 const Header = ({ onSearch, onMenuToggle, stats }) => {
   const [showStats, setShowStats] = useState(false);
+  const { logout } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
 
   return (
     <header className="bg-white border-b border-gray-200 px-4 py-4 lg:px-6">
@@ -30,7 +34,24 @@ const Header = ({ onSearch, onMenuToggle, stats }) => {
           <SearchBar onSearch={onSearch} />
         </div>
 
-        <div className="flex items-center space-x-4">
+<div className="flex items-center space-x-4">
+          {user && (
+            <div className="hidden sm:flex items-center space-x-2 text-sm text-gray-600">
+              <ApperIcon name="User" className="w-4 h-4" />
+              <span>{user.firstName} {user.lastName}</span>
+            </div>
+          )}
+          
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={logout}
+            className="text-gray-600 hover:text-gray-800"
+          >
+            <ApperIcon name="LogOut" className="w-4 h-4 mr-1" />
+            <span className="hidden sm:inline">Logout</span>
+          </Button>
+          
           <button
             onClick={() => setShowStats(!showStats)}
             className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"

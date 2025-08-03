@@ -12,7 +12,7 @@ const QuickAddTask = ({ onAddTask, categories }) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    category: "personal",
+    category: "",
     priority: 2,
     dueDate: ""
   });
@@ -28,7 +28,7 @@ const QuickAddTask = ({ onAddTask, categories }) => {
     const taskData = {
       title: formData.title.trim(),
       description: formData.description.trim(),
-      category: formData.category,
+      category: parseInt(formData.category) || categories[0]?.Id,
       priority: parseInt(formData.priority),
       dueDate: formData.dueDate ? parseDateInput(formData.dueDate) || new Date() : null,
       completed: false
@@ -36,10 +36,10 @@ const QuickAddTask = ({ onAddTask, categories }) => {
 
     try {
       await onAddTask(taskData);
-      setFormData({
+setFormData({
         title: "",
         description: "",
-        category: "personal",
+        category: "",
         priority: 2,
         dueDate: ""
       });
@@ -113,9 +113,9 @@ const QuickAddTask = ({ onAddTask, categories }) => {
                 value={formData.category}
                 onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
               >
-                {categories.map(category => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
+{categories.map(category => (
+                  <option key={category.Id} value={category.Id}>
+                    {category.Name}
                   </option>
                 ))}
               </Select>

@@ -105,12 +105,14 @@ const TasksPage = () => {
   };
 
   // Filter tasks based on category and search term
-  const filteredTasks = tasks.filter(task => {
-    const matchesCategory = !categoryId || categoryId === "all" || task.category === categoryId;
+const filteredTasks = tasks.filter(task => {
+    const matchesCategory = !categoryId || categoryId === "all" || 
+      (task.category?.Id === parseInt(categoryId)) || 
+      (task.category === parseInt(categoryId));
     const matchesSearch = !searchTerm || 
       task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      task.category.toLowerCase().includes(searchTerm.toLowerCase());
+      (task.category?.Name && task.category.Name.toLowerCase().includes(searchTerm.toLowerCase()));
     
     return matchesCategory && matchesSearch;
   });
@@ -122,7 +124,7 @@ const TasksPage = () => {
     <div className="p-4 lg:p-6 max-w-4xl mx-auto">
       <QuickAddTask 
         onAddTask={handleAddTask} 
-        categories={categories.filter(c => c.id !== "all")}
+categories={categories.filter(c => c.Id !== 1)}
       />
       
       {filteredTasks.length === 0 ? (
@@ -145,7 +147,7 @@ const TasksPage = () => {
           onToggleComplete={handleToggleComplete}
           onUpdateTask={handleUpdateTask}
           onDeleteTask={handleDeleteTask}
-          categories={categories.filter(c => c.id !== "all")}
+categories={categories.filter(c => c.Id !== 1)}
         />
       )}
     </div>

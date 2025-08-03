@@ -12,7 +12,7 @@ const TaskEditModal = ({ task, isOpen, onClose, onSave, categories }) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    category: "personal",
+    category: "",
     priority: 2,
     dueDate: ""
   });
@@ -22,7 +22,7 @@ const TaskEditModal = ({ task, isOpen, onClose, onSave, categories }) => {
       setFormData({
         title: task.title || "",
         description: task.description || "",
-        category: task.category || "personal",
+        category: task.category?.Id || task.category || "",
         priority: task.priority || 2,
         dueDate: task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : ""
       });
@@ -41,10 +41,10 @@ const TaskEditModal = ({ task, isOpen, onClose, onSave, categories }) => {
       ...task,
       title: formData.title.trim(),
       description: formData.description.trim(),
-      category: formData.category,
+      category: parseInt(formData.category),
       priority: parseInt(formData.priority),
-      dueDate: formData.dueDate ? new Date(formData.dueDate) : null,
-      updatedAt: new Date()
+      dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : null,
+      updatedAt: new Date().toISOString()
     };
 
     try {
@@ -122,9 +122,9 @@ const TaskEditModal = ({ task, isOpen, onClose, onSave, categories }) => {
                     value={formData.category}
                     onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
                   >
-                    {categories.map(category => (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
+{categories.map(category => (
+                      <option key={category.Id} value={category.Id}>
+                        {category.Name}
                       </option>
                     ))}
                   </Select>
